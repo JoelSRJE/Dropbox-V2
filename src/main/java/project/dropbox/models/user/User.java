@@ -1,10 +1,8 @@
 package project.dropbox.models.user;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import project.dropbox.models.file.FileEntity;
 import project.dropbox.models.folder.FolderEntity;
@@ -26,7 +24,10 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
+    private String githubId;
+
+    @Column
     @JsonIgnore
     private String passwordHash;
 
@@ -54,9 +55,9 @@ public class User {
 
     protected User() {}
 
-    public User(String email, String passwordHash) {
+    public User(String email, String githubId) {
         this.email = email;
-        this.passwordHash = passwordHash;
+        this.githubId = githubId;
         this.createdAt = LocalDateTime.now();
         this.accountType = AccountType.USER;
     }

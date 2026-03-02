@@ -24,8 +24,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error", exception.getMessage()));
     }
 
-    @ExceptionHandler(EmailIsBlankException.class)
-    public ResponseEntity<?> handleEmailIsEmpty(EmailIsBlankException exception) {
+    @ExceptionHandler(GithubIdIsNullException.class)
+    public ResponseEntity<?> handleEmailIsEmpty(GithubIdIsNullException exception) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", exception.getMessage()));
     }
 
@@ -34,8 +34,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", exception.getMessage()));
     }
 
-    @ExceptionHandler(PasswordIsEmptyException.class)
-    public ResponseEntity<?> handlePasswordIsEmpty(PasswordIsEmptyException exception) {
+    @ExceptionHandler(UserIdIsNullException.class)
+    public ResponseEntity<?> handlePasswordIsEmpty(UserIdIsNullException exception) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", exception.getMessage()));
     }
 
