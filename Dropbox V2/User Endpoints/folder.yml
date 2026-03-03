@@ -1,0 +1,7 @@
+info:
+  name: User Endpoints
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

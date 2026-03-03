@@ -1,6 +1,6 @@
 package project.dropbox.requests.user;
 
 public record UpdateUserRequest(
-        String email
+        String username
 ) {
 }

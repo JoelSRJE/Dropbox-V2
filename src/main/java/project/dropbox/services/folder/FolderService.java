@@ -33,7 +33,7 @@ public class FolderService implements IFolderService {
      * @throws FolderDoesntExistException - OM objektet inte existerar eller tillhör användaren.
      */
     @Override
-    public FolderEntity findFolderById(UUID folderId, UUID userId) {
+    public FolderEntity getFolderById(UUID folderId, UUID userId) {
 
         FolderEntity foundFolder = folderRepository.findByFolderIdAndFolderOwner_UserId(folderId, userId);
 
@@ -92,7 +92,7 @@ public class FolderService implements IFolderService {
      * @param folderId - id:et för foldern som ska raderas.
      * @param userId - id:et för användaren.
      * @return - det raderade FolderEntity-objektet.
-     * @throws FolderDoesntExistException - OM foldern inte existerar eller inte tillhör ägaren via findFolderById-funktionen.
+     * @throws FolderDoesntExistException - OM foldern inte existerar eller inte tillhör ägaren via ffindByFolderIdAndFolderOwner_UserId-funktionen.
      * @throws FolderOwnerIsntSameException - OM foldern inte tillhör den angivna ägaren
      */
     @Override

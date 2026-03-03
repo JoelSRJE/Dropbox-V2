@@ -7,10 +7,10 @@ import java.util.UUID;
 
 public record RegisteredUserDto(
         UUID userId,
-        String email,
+        String username,
         LocalDateTime createdAt
 ) {
     public static RegisteredUserDto from(User user) {
-        return new RegisteredUserDto(user.getUserId(), user.getEmail(), user.getCreatedAt());
+        return new RegisteredUserDto(user.getUserId(), user.getUsername(), user.getCreatedAt());
     }
 }

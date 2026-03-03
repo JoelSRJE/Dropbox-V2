@@ -22,7 +22,7 @@ public class User {
     private UUID userId;
 
     @Column(unique = true)
-    private String email;
+    private String username;
 
     @Column(unique = true, nullable = false)
     private String githubId;
@@ -55,8 +55,8 @@ public class User {
 
     protected User() {}
 
-    public User(String email, String githubId) {
-        this.email = email;
+    public User(String username, String githubId) {
+        this.username = username;
         this.githubId = githubId;
         this.createdAt = LocalDateTime.now();
         this.accountType = AccountType.USER;

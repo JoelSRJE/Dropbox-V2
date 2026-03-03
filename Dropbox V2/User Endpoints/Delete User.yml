@@ -1,0 +1,18 @@
+info:
+  name: Delete User
+  type: http
+  seq: 1
+
+http:
+  method: DELETE
+  url: http://localhost:8080/user
+  headers:
+    - name: Authorization
+      value: Bearer {{AUTH_TOKEN}}
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

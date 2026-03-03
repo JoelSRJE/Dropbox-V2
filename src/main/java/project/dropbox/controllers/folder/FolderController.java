@@ -1,6 +1,7 @@
 package project.dropbox.controllers.folder;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,9 @@ import project.dropbox.services.folder.FolderService;
 import java.util.List;
 import java.util.UUID;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @RestController
 @RequestMapping("/folder")
 @RequiredArgsConstructor
@@ -24,17 +28,29 @@ public class FolderController {
 
     private final FolderService folderService;
 
-    @PostMapping("/create")
-    public ResponseEntity<NewFolderDto> createFolder(
+    @PostMapping
+    public ResponseEntity<EntityModel<NewFolderDto>> createFolder(
             @RequestBody CreateFolderRequest request,
             @AuthenticationPrincipal User authenticatedUser
             ) {
         FolderEntity folder = folderService.createFolder(request, authenticatedUser.getUserId());
 
-        return ResponseEntity.ok(NewFolderDto.from(folder));
+        NewFolderDto newFolderDto = NewFolderDto.from(folder);
+
+        EntityModel<NewFolderDto> folderModel = EntityModel.of(newFolderDto);
+
+        //
+        folderModel.add(
+                linkTo(methodOn(FolderController.class)
+                        .getFolderById(folder.getFolderId(), null))
+                        .withSelfRel()
+        ):
+
+
+        return ResponseEntity.created(EntityModel<newFolderDto>);
     }
 
-    @GetMapping("/folders")
+    @GetMapping
     public ResponseEntity<List<GetFolderDto>> getAllFoldersForUser(
             @AuthenticationPrincipal User authenticatedUser
             ) {
@@ -44,7 +60,15 @@ public class FolderController {
                 .toList());
     }
 
-    @PutMapping("/update/{folderId}")
+    @GetMapping("/{folderId}")
+    public ResponseEntity<EntityModel<GetFolderDto>> getFolderById(
+            @PathVariable UUID folderId,
+            @AuthenticationPrincipal User authenticatedUser
+    ) {
+        FolderEntity folder = folderService.get
+    }
+
+    @PutMapping("/{folderId}")
     public ResponseEntity<UpdateFolderDto> updateFolder(
             @PathVariable UUID folderId,
             @RequestBody UpdateFolderRequest request,
@@ -55,7 +79,7 @@ public class FolderController {
         return ResponseEntity.ok(UpdateFolderDto.from(updatedFolder));
     }
 
-    @DeleteMapping("/delete/{folderId}")
+    @DeleteMapping("/{folderId}")
     public ResponseEntity<DeletedFolderDto> deleteFolder(
             @PathVariable UUID folderId,
             @AuthenticationPrincipal User authenticatedUser

@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(GithubIdIsNullException.class)
-    public ResponseEntity<?> handleEmailIsEmpty(GithubIdIsNullException exception) {
+    public ResponseEntity<?> handleGithubIdIsEmpty(GithubIdIsNullException exception) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", exception.getMessage()));
     }
 

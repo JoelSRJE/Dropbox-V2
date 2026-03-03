@@ -10,7 +10,7 @@ import java.util.UUID;
 // Kräver Authorization
 public interface IFolderService {
     // Hittar en specific folder baserat på dess id och ägarens id.
-    FolderEntity findFolderById(UUID folderId, UUID folderOwner);
+    FolderEntity getFolderById(UUID folderId, UUID folderOwner);
 
     // Skapar ett nytt FolderEntity objekt som sedan sparas i databasen.
     FolderEntity createFolder(CreateFolderRequest request, UUID userId);

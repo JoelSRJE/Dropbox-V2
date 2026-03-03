@@ -8,14 +8,14 @@ import java.util.UUID;
 
 public record DeletedUserDto(
         UUID userId,
-        String email,
+        String username,
         AccountType accountType,
         LocalDateTime createdAt
 ) {
     public static DeletedUserDto from(User user) {
         return new DeletedUserDto(
                 user.getUserId(),
-                user.getEmail(),
+                user.getUsername(),
                 user.getAccountType(),
                 user.getCreatedAt()
         );

@@ -1,6 +1,7 @@
 package project.dropbox.services.user;
 
 import project.dropbox.dto.user.GetUserDto;
+import project.dropbox.dto.user.UpdatedUserDto;
 import project.dropbox.models.user.User;
 import project.dropbox.requests.user.UpdateUserRequest;
 
@@ -17,8 +18,8 @@ public interface IUserService {
 
     // Authorized methods
 
-    // Uppdaterar en användare. Går bara att uppdatera email i nuläget.
-    User updateUser(UUID userId, UpdateUserRequest request);
+    // Uppdaterar en användare. Går bara att uppdatera username i nuläget.
+    UpdatedUserDto updateUser(UUID userId, UpdateUserRequest request);
 
     // Raderar en användare baserat på dess id.
     User deleteUser(UUID userId);
