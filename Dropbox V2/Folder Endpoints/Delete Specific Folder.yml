@@ -5,7 +5,10 @@ info:
 
 http:
   method: DELETE
-  url: http://localhost:8080/folder/
+  url: http://localhost:8080/folder/bab00e84-4b11-48ed-9318-491f48eca885
+  headers:
+    - name: Authorization
+      value: Bearer {{AUTH_TOKEN}}
   auth: inherit
 
 settings:

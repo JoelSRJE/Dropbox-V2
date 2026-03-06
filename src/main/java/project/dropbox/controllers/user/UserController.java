@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import project.dropbox.dto.user.DeletedUserDto;
@@ -38,19 +39,19 @@ public class UserController {
 
         userModel.add(
                 linkTo(methodOn(UserController.class)
-                        .getCurrentUser(null))
+                        .getCurrentUser(authenticatedUser))
                         .withSelfRel()
         );
 
         userModel.add(
                 linkTo(methodOn(UserController.class)
-                        .updateUser(null, null))
+                        .updateUser(authenticatedUser, null))
                         .withRel("update")
         );
 
         userModel.add(
                 linkTo(methodOn(UserController.class)
-                        .deleteUser(null))
+                        .deleteUser(authenticatedUser))
                         .withRel("delete")
         );
 
@@ -69,20 +70,22 @@ public class UserController {
        EntityModel<UpdatedUserDto> model = EntityModel.of(updatedUserDto);
 
        model.add(linkTo(methodOn(UserController.class)
-               .getCurrentUser(null))
+               .getCurrentUser(authenticatedUser))
                .withSelfRel());
 
        model.add(linkTo(methodOn(UserController.class)
-               .deleteUser(null))
+               .deleteUser(authenticatedUser))
                .withRel("delete"));
 
 
        return ResponseEntity.ok(model);
    }
 
-   // Ska låsa denna så icke admin användare inte kan använda denna!
+   @PreAuthorize("hasRole('ADMIN')")
    @GetMapping
-   public ResponseEntity<CollectionModel<EntityModel<GetUserDto>>> getUsers() {
+   public ResponseEntity<CollectionModel<EntityModel<GetUserDto>>> getUsers(
+           @AuthenticationPrincipal User authenticatedUser
+   ) {
 
        List<EntityModel<GetUserDto>> users = userService.getAllUsers()
                .stream()
@@ -91,7 +94,7 @@ public class UserController {
 
                    model.add(
                            linkTo(methodOn(UserController.class)
-                                   .getCurrentUser(null))
+                                   .getCurrentUser(authenticatedUser))
                                    .withRel("self")
                    );
 

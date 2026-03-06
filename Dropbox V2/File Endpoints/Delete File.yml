@@ -1,14 +1,17 @@
 info:
-  name: Get All Folders
+  name: Delete File
   type: http
-  seq: 2
+  seq: 7
 
 http:
-  method: GET
-  url: http://localhost:8080/folder
+  method: DELETE
+  url: http://localhost:8080/files/735c2fe9-d21a-47ea-92bf-839d3da482da
   headers:
     - name: Authorization
       value: Bearer {{AUTH_TOKEN}}
+  body:
+    type: json
+    data: ""
   auth: inherit
 
 settings:

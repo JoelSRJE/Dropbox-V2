@@ -5,7 +5,10 @@ info:
 
 http:
   method: GET
-  url: http://localhost:8080/folder/
+  url: http://localhost:8080/folder/43fe2483-8298-4aa4-abb3-a4b337e264cc
+  headers:
+    - name: Authorization
+      value: Bearer {{AUTH_TOKEN}}
   auth: inherit
 
 settings:

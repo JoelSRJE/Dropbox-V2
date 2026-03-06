@@ -1,0 +1,28 @@
+info:
+  name: Create File
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: http://localhost:8080/files
+  headers:
+    - name: Authorization
+      value: Bearer {{AUTH_TOKEN}}
+  body:
+    type: json
+    data: |-
+      {
+        "fileName": "Test",
+        "contentType": "text/plain",
+        "data": "WW91IHNob3VsZA0KDQpkZWxldGUgdGhpcw0KDQpmaWxlIHdoZW4NCg0KeW91J3JlIGRvbmUNCg0KdGVzdGluZyBpdA==",
+        "folder": "43fe2483-8298-4aa4-abb3-a4b337e264cc",
+        "fileOwner": "5d9e2231-a389-43c0-8aaf-e0cf4c469b96" 
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

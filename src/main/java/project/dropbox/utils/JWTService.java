@@ -28,7 +28,7 @@ public class JWTService {
         return JWT.create()
                 .withIssuer("backend")
                 .withIssuedAt(Instant.now())
-                .withExpiresAt(Instant.now().plus(60, ChronoUnit.MINUTES))
+                .withExpiresAt(Instant.now().plus(20, ChronoUnit.MINUTES))
                 .withSubject(userId.toString())
                 .withClaim("Authorized", true)
                 .sign(algorithm);

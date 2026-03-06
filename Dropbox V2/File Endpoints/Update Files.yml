@@ -1,11 +1,11 @@
 info:
-  name: Create Folder
+  name: Update Files
   type: http
-  seq: 1
+  seq: 6
 
 http:
-  method: POST
-  url: http://localhost:8080/folder
+  method: PUT
+  url: http://localhost:8080/files/735c2fe9-d21a-47ea-92bf-839d3da482da
   headers:
     - name: Authorization
       value: Bearer {{AUTH_TOKEN}}
@@ -13,9 +13,7 @@ http:
     type: json
     data: |-
       {
-        "folderName": "Test2",
-        "ownerId": "5d9e2231-a389-43c0-8aaf-e0cf4c469b96",
-        "parentFolder": null
+        "fileName": "Test after update"
       }
   auth: inherit
 

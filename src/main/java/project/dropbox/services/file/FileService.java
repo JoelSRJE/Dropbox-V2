@@ -43,7 +43,6 @@ public class FileService implements IFileService {
         return fileRepository.findByFileOwner_UserId(ownerId);
     }
 
-
     /**
      * Sparar ett FileEntity-objekt i databasen om allt stämmer.
      *
